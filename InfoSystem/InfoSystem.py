@@ -73,11 +73,23 @@ def sub_menu_query():
 
 
 def main():
-    data_manager.init_system()
+
+    try:
+        isOk = IO_system.recover_data_base('statement',data_manager,'.txt')
+
+        if not isOk:
+
+            print('  Ошибка восстановления базы данных из файла')
+
+            data_manager.init_system()
+
+    except:
+        data_manager.init_system()
+
     head_command = {'1': sub_menu_print_base, '2': sub_menu_append,
                     '3': sub_menu_delete, '4': sub_menu_query, '9': clear}
     menu(head_command, menu_head)
-    # Тут должен быть метод сохранения базы
+    IO_system.save_data_base('statement', data_manager, '.txt')
 
 if __name__ == '__main__':
     main()

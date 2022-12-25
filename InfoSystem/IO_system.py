@@ -4,7 +4,14 @@
 from enum import Enum
 import json
 from DataManager import DataManager
-
+from datetime import date
+from Person import Person
+from Position import Position
+from Employee import Employee
+from TypeOfGenders import TypeOfGenders
+from TypeOfPositions import TypeOfPositions
+from TypeOfLevels import TypeOfLevels
+from TypeOfDepartments import TypeOfDepartments
 
 class IO_system:
 
@@ -12,23 +19,127 @@ class IO_system:
 
         if extention.lower() == '.txt':
 
-            with open(file_name + '_persons' + extention, 'r', encoding="utf-8") as file:
+            with open(file_name + '_persons' + extention, 'w', encoding="utf-8") as file:
                 file.write(len(data_manager.persons) + '\n')
 
                 for person in data_manager.persons:
                     file.write(person.to_txt_file() + '\n')
 
-            with open(file_name + '_positions' + extention, 'r', encoding="utf-8") as file:
+            with open(file_name + '_positions' + extention, 'w', encoding="utf-8") as file:
                 file.write(len(data_manager.positions) + '\n')
 
                 for position in data_manager.positions:
                     file.write(position.to_txt_file() + '\n')
 
-            with open(file_name + '_employees' + extention, 'r', encoding="utf-8") as file:
+            with open(file_name + '_employees' + extention, 'w', encoding="utf-8") as file:
                 file.write(len(data_manager.employees) + '\n')
 
                 for employee in data_manager.employees:
                     file.write(employee.to_txt_file(data_manager) + '\n')
+
+        else:
+
+            print('Расширение ' + extention + ' не поддерживается')
+
+    
+
+    def recover_data_base(file_name:str, data_manager:DataManager, extention:str):
+
+        if extention.lower() == '.txt':
+
+            with open(file_name + '_persons' + extention, 'r', encoding="utf-8") as file:
+                lines = file.readlines()
+
+                try:
+                    
+                    data_manager.persons = []
+
+                    count = int(lines.pop().strip())
+
+                    for i in range(1,count):
+
+                        new_person = Person('', '', '', date.now(), TypeOfGenders.male)
+
+                        try:
+                        
+                            new_person.from_txt_file(lines.pop())
+
+                            data_manager.persons.append(new_person)
+
+                        except:
+
+                            continue
+
+                except:
+
+                    return False
+
+            
+
+            with open(file_name + '_positions' + extention, 'r', encoding="utf-8") as file:
+                lines = file.readlines()
+
+                try:
+                    
+                    data_manager.positions = []
+
+                    count = int(lines.pop().strip())
+
+                    for i in range(1,count):
+
+                        new_position = Position(0.0, TypeOfPositions.boss, TypeOfLevels.junior)
+
+                        try:
+                        
+                            new_position.from_txt_file(lines.pop())
+
+                            data_manager.positions.append(new_position)
+
+                        except:
+
+                            continue
+
+                except:
+
+                    return False
+
+
+
+            with open(file_name + '_employees' + extention, 'r', encoding="utf-8") as file:
+                lines = file.readlines()
+
+                try:
+                    
+                    data_manager.employees = []
+
+                    count = int(lines.pop().strip())
+
+                    for i in range(1,count):
+
+                        new_employee = Employee(TypeOfDepartments.engineering, None, None)
+
+                        try:
+                        
+                            new_employee.from_txt_file(lines.pop(), data_manager)
+
+                            data_manager.employees.append(new_employee)
+
+                        except:
+
+                            continue
+
+                except:
+
+                    return False
+
+            return True 
+
+        else:
+
+            print('Расширение ' + extention + ' не поддерживается')
+
+            return False
+
                     
 
 
