@@ -8,15 +8,19 @@ from typing import Tuple
 class IO_system:
 
     def read_statement(file_name:str):
+        with open (file_name,'r', encoding="utf-8") as file:
+            result = json.load (file)
 
         # Функция чтения файла состяния базы
         # вызываем в начале работы программы из DataManager
         # На входе имя файла или полный путь к нему
         # На выходе кортеж типа (persons, position, departments, employees)
 
-        return
+        return result
 
-    def write_statement(statement:Tuple):
+    def write_statement(statement:Tuple, file_name:str):
+        with open (file_name,'w', encoding="utf-8") as file:
+            json.dump(a, file)
 
         # Функция записи состояния базы данных в файл
         # вызываем в конце работы программы из DataManager
