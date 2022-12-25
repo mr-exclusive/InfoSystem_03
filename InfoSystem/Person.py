@@ -46,3 +46,39 @@ class Person:
             str(self.date_of_birth.year).zfill(4) + ')'
 
 
+    # Функция для сохранения всех полей в текстовый файл
+    def to_txt_file(self):
+
+        return self.last_name + ' ' + \
+               self.first_name + ' ' + \
+               self.middle_name + ' ' + \
+               str(self.date_of_birth.day).zfill(2) + ' ' + \
+               str(self.date_of_birth.month).zfill(2) + ' ' + \
+               str(self.date_of_birth.year).zfill(4) + ' ' + \
+               str(self.gender.value)
+
+    
+
+    # Функция чтения всех полей их текстовой строки
+    def from_txt_file(self, line:str):
+
+        splitted = line.split(' ')
+
+        if len(splitted) < 7:
+
+            return False
+
+        try:
+            self.last_name = splitted[0]
+            self.first_name = splitted[1]
+            self.middle_name = splitted[2]
+            self.date_of_birth = date(int(splitted[3]),int(splitted[4]),int(splitted[5]))
+            self.gender = TypeOfGenders(int(splitted[6]))
+
+            return True
+
+        except:
+
+            return False
+
+

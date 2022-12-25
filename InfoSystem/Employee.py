@@ -17,7 +17,14 @@ class Employee:
         self.person = person
 
         self.position = position
+                
 
+    # Функция представления персоны в виде строки (вывод на консоль)
+    def to_string(self):
+
+        return self.person.to_string() + '   ' + \
+            self.position.to_string() + ' (' + \
+            str(self.department.value) + ')'
 
 
 

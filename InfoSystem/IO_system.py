@@ -2,10 +2,25 @@
 # Класс для работы с файлами и вводом/выводом
 
 from enum import Enum
+import json
 from typing import Tuple
+from DataManager import DataManager
 
 
 class IO_system:
+
+    def save_bases(file_name:str, data_manager:DataManager, ext:str):
+
+        if ext.lower() == '.txt':
+
+            with open (file_name + '_persons' + ext,'r', encoding="utf-8") as file:
+
+                file.write(len(data_manager.persons)+'\n')
+
+        elif extention.lower() == '.json':
+
+        return
+
 
     def read_statement(file_name:str):
         with open (file_name,'r', encoding="utf-8") as file:
@@ -17,6 +32,7 @@ class IO_system:
         # На выходе кортеж типа (persons, position, departments, employees)
 
         return result
+
 
     def write_statement(statement:Tuple, file_name:str):
         with open (file_name,'w', encoding="utf-8") as file:

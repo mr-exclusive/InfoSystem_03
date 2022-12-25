@@ -25,3 +25,34 @@ class Position:
     def to_string(self):
 
         return str(self.position_level) + ' ' + str(self.position_type) + ' (' + str(self.salary) + ' рублей)'
+
+    
+
+    # Функция для сохранения всех полей в текстовый файл
+    def to_txt_file(self):
+
+        return self.position_type.value + ' ' + \
+               self.position_level.value + ' ' + \
+               str(self.salary).repl(',','.')
+
+    
+
+    # Функция чтения всех полей их текстовой строки
+    def from_txt_file(self, line:str):
+
+        splitted = line.split(' ')
+
+        if len(splitted) < 3:
+
+            return False
+
+        try:
+            self.position_type = TypeOfPositions[splitted[0]]
+            self.position_level = TypeOfLevels[splitted[1]]
+            self.salary = float(splitted[2].replace(',','.'))
+
+            return True
+
+        except:
+
+            return False
