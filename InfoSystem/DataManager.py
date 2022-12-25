@@ -55,6 +55,9 @@ class DataManager:
 
         """Теперь мы можем добавить человека с помощью консоли (завернув это в функцию)
         После назначить должность. Перед этим предложить выбрать человека из списка (ввод только номера из имеющихся) и т.д."""
+        
+        return
+
 
 
     # Функция добавляет человека. Это не влияет пока ни на что далее
@@ -72,6 +75,7 @@ class DataManager:
             date(input('Год рождения: '), input('Месяц рождения: '), input('День рождения: ')), 
             TypeOfGenders(input('Выберите пол. Мужской: 1 , Женский: 2 '))))
     
+        return
 
 
     def add_position(self):
@@ -89,6 +93,7 @@ class DataManager:
         
         print("\nСотрудник успешно добавлен!\n")
     
+        return
 
 
     def get_employee(self):
@@ -129,6 +134,10 @@ class DataManager:
 
             print("\nНекорректный ввод!\n")
 
+        return
+
+
+
     def change_salary(self):
         """Метод изменения заработной платы сотрудника"""
 
@@ -157,7 +166,8 @@ class DataManager:
         else:
 
             print("\nНекорректный ввод!\n")
-
+            
+        return
 
         
     def change_department(self):
@@ -184,7 +194,8 @@ class DataManager:
         else:
 
             print("\nНекорректный ввод!\n")
-
+            
+        return
 
     
     def delete_employee(self): # тестовая функция
@@ -211,7 +222,8 @@ class DataManager:
         else:
 
             print("Некорректный ввод!")
-
+            
+        return
 
 
     # Функция добавляет сотрудника. Устанавливает связь элемента массива persons и элемента массива position
