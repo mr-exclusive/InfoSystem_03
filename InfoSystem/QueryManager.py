@@ -20,17 +20,16 @@ class ComparisonOperator(Enum):
 
 
 def get_operator(op):
-    match op:
-        case ComparisonOperator.GREATER:
-            return operator.gt
-        case ComparisonOperator.GREATER_OR_EQUAL:
-            return operator.ge
-        case ComparisonOperator.LESS:
-            return operator.lt
-        case ComparisonOperator.LESS_OR_EQUAL:
-            return operator.le
-        case ComparisonOperator.EQUAL:
-            return operator.eq
+    if op == ComparisonOperator.GREATER:
+        return operator.gt
+    if op == ComparisonOperator.GREATER_OR_EQUAL:
+        return operator.ge
+    if op == ComparisonOperator.LESS:
+        return operator.lt
+    if op == ComparisonOperator.LESS_OR_EQUAL:
+        return operator.le
+    if op == ComparisonOperator.EQUAL:
+        return operator.eq
 
 
 # ищем сотрудников по отделу
@@ -71,27 +70,27 @@ def employees_of_level(data_manager: DataManager, level: TypeOfLevels):
     return [empl for empl in data_manager.employees if empl.position.position_level == level]
 
 
-import QueryManager
-from QueryManager import ComparisonOperator as cop
+#import QueryManager
+#from QueryManager import ComparisonOperator as cop
 
-if __name__ == "__QueryManager__":
-    data_manager = DataManager()
-    data_manager.init_system()
+#if __name__ == "__QueryManager__":
+#    data_manager = DataManager()
+#    data_manager.init_system()
 
-    print('50 <= salary < 200')
-    filtered_employees = QueryManager.employees_salary(data_manager, 100.0, cop.GREATER_OR_EQUAL, 200.0, cop.LESS)
-    IO_system.print_a_list_with_indexes(filtered_employees)
-    print('salary <= 200')
-    filtered_employees = QueryManager.employees_salary(data_manager, 200.0, cop.LESS_OR_EQUAL)
-    IO_system.print_a_list_with_indexes(filtered_employees)
-    print('salary == 600')
-    filtered_employees = QueryManager.employees_salary(data_manager, 600.0, cop.EQUAL)
-    IO_system.print_a_list_with_indexes(filtered_employees)
+#    print('50 <= salary < 200')
+#    filtered_employees = QueryManager.employees_salary(data_manager, 100.0, cop.GREATER_OR_EQUAL, 200.0, cop.LESS)
+#    IO_system.print_a_list_with_indexes(filtered_employees)
+#    print('salary <= 200')
+#    filtered_employees = QueryManager.employees_salary(data_manager, 200.0, cop.LESS_OR_EQUAL)
+#    IO_system.print_a_list_with_indexes(filtered_employees)
+#    print('salary == 600')
+#    filtered_employees = QueryManager.employees_salary(data_manager, 600.0, cop.EQUAL)
+#    IO_system.print_a_list_with_indexes(filtered_employees)
 
-    print('position == Boss')
-    filtered_employees = QueryManager.employees_of_position(data_manager, data_manager.positions[0].position_type)
-    IO_system.print_a_list_with_indexes(filtered_employees)
+#    print('position == Boss')
+#    filtered_employees = QueryManager.employees_of_position(data_manager, data_manager.positions[0].position_type)
+#    IO_system.print_a_list_with_indexes(filtered_employees)
 
-    print('level == middle')
-    filtered_employees = QueryManager.employees_of_level(data_manager, data_manager.positions[1].position_level)
-    IO_system.print_a_list_with_indexes(filtered_employees)
+#    print('level == middle')
+#    filtered_employees = QueryManager.employees_of_level(data_manager, data_manager.positions[1].position_level)
+#    IO_system.print_a_list_with_indexes(filtered_employees)

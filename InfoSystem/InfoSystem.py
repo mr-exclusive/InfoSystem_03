@@ -9,6 +9,7 @@ import click
 from IO_system import IO_system
 from DataManager import DataManager
 from TypeOfDepartments import TypeOfDepartments
+import QueryManager
 
 data_manager = DataManager()
 def clear():
@@ -65,8 +66,7 @@ def sub_menu_query():
     def query_by_dep():
         print(' Выберите отдел:')
         selectedDepartment = IO_system.select_from_enum(TypeOfDepartments, ' Введите код отдела: ')
-        IO_system().print_a_list_with_indexes(QueryManager.EmpluyeesFromDepartmentQuery(
-            TypeOfDepartments(selectedDepartment), data_manager))
+        IO_system.print_a_list_with_indexes(QueryManager.employees_from_department(  TypeOfDepartments(selectedDepartment), data_manager))
     query_command = {'1': query_by_dep, '2': zaglushka, '9': clear}
     menu(query_command, menu_query)
 
