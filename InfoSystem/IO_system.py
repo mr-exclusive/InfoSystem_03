@@ -3,28 +3,38 @@
 
 from enum import Enum
 import json
-from typing import Tuple
 from DataManager import DataManager
 
 
 class IO_system:
 
-    def save_bases(file_name:str, data_manager:DataManager, ext:str):
+    def save_data_base(file_name:str, data_manager:DataManager, extention:str):
 
-        if ext.lower() == '.txt':
+        if extention.lower() == '.txt':
 
-            with open (file_name + '_persons' + ext,'r', encoding="utf-8") as file:
+            with open(file_name + '_persons' + extention, 'r', encoding="utf-8") as file:
+                file.write(len(data_manager.persons) + '\n')
 
-                file.write(len(data_manager.persons)+'\n')
+                for person in data_manager.persons:
+                    file.write(person.to_txt_file() + '\n')
 
-        elif extention.lower() == '.json':
+            with open(file_name + '_positions' + extention, 'r', encoding="utf-8") as file:
+                file.write(len(data_manager.positions) + '\n')
 
-        return
+                for position in data_manager.positions:
+                    file.write(position.to_txt_file() + '\n')
+
+            with open(file_name + '_employees' + extention, 'r', encoding="utf-8") as file:
+                file.write(len(data_manager.employees) + '\n')
+
+                for employee in data_manager.employees:
+                    file.write(employee.to_txt_file(data_manager) + '\n')
+                    
 
 
     def read_statement(file_name:str):
-        with open (file_name,'r', encoding="utf-8") as file:
-            result = json.load (file)
+        with open (file_name, 'r', encoding="utf-8") as file:
+            result = json.load(file)
 
         # Функция чтения файла состяния базы
         # вызываем в начале работы программы из DataManager
@@ -34,9 +44,9 @@ class IO_system:
         return result
 
 
-    def write_statement(statement:Tuple, file_name:str):
+    def write_statement(statement, file_name:str):
         with open (file_name,'w', encoding="utf-8") as file:
-            json.dump(a, file)
+            json.dump(statement, file)
 
         # Функция записи состояния базы данных в файл
         # вызываем в конце работы программы из DataManager
@@ -82,5 +92,7 @@ class IO_system:
             selectedDepartment = int(input(message))
 
         return selectedDepartment
+
+    pass
 
 
