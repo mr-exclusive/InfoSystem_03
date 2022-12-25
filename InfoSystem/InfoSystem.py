@@ -35,16 +35,16 @@ def menu(list_command: dict, invate: str):
             print('Такой команды нет!!!')
 
 
-def sub_menu_print_base():
+def sub_menu_print_base(data_manager:DataManager):
 
     def print_per():
-        IO_system().print_a_list_with_indexes(DataManager().persons)
+        IO_system().print_a_list_with_indexes(data_manager.persons)
 
     def print_pos():
-        IO_system().print_a_list_with_indexes(DataManager().positions)
+        IO_system().print_a_list_with_indexes(data_manager.positions)
 
     def print_emp():
-        IO_system().print_a_list_with_indexes(DataManager().employees)
+        IO_system().print_a_list_with_indexes(data_manager.employees)
 
     print_command = {'1': print_per,
                      '2': print_pos, '3': print_emp, '9': clear}
