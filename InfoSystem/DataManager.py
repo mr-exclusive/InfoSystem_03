@@ -72,8 +72,8 @@ class DataManager:
             input('Введите имя: '), 
             input('Введите фамилию: '), 
             input('Введите отчество: '), 
-            date(input('Год рождения: '), input('Месяц рождения: '), input('День рождения: ')), 
-            TypeOfGenders(input('Выберите пол. Мужской: 1 , Женский: 2 '))))
+            date(int(input('Год рождения: ')), int(input('Месяц рождения: ')), int(input('День рождения: '))), 
+            TypeOfGenders(int(input('Выберите пол. Мужской: 1 , Женский: 2 ')))))
     
         return
 
