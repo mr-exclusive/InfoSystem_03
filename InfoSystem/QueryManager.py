@@ -1,23 +1,18 @@
-﻿
-# Класс, в котором будут все запросы в базу данных и логика из обработки
+﻿# Класс, в котором будут все запросы в базу данных и логика из обработки
 # Вроде "Найти всех мидл-инженеров с такой-то зарплатой"
 
 from DataManager import DataManager
-from TypeOfDepartments import TypeOfDepartments 
+from TypeOfDepartments import TypeOfDepartments
 
 
-class QueryManager:
+def employees_from_department(department: TypeOfDepartments, data_manager: DataManager):
 
-    def EmpluyeesFromDepartmentQuery(dep:TypeOfDepartments, dataManager:DataManager):
+    result = []
 
-        result = []
+    for e in data_manager.employees:
 
-        for e in dataManager.employees:
+        if e.department == department:
 
-            if e.department == dep:
+            result.append(e)
 
-                result.append(e)
-
-        return result
-
-    pass
+    return result
