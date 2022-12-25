@@ -61,6 +61,6 @@ class IO_system:
 
             selectedDepartment = int(input(message))
 
-    pass
+        return selectedDepartment
 
 

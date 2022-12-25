@@ -8,10 +8,10 @@ import os
 import click
 from IO_system import IO_system
 from DataManager import DataManager
-from QueryManager import QueryManager as qm
+from QueryManager import QueryManager
 from TypeOfDepartments import TypeOfDepartments
 
-
+data_manager = DataManager()
 def clear():
     return os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -35,16 +35,16 @@ def menu(list_command: dict, invate: str):
             print('Такой команды нет!!!')
 
 
-def sub_menu_print_base(data_manager:DataManager):
+def sub_menu_print_base():
 
     def print_per():
-        IO_system().print_a_list_with_indexes(data_manager.persons)
+        IO_system.print_a_list_with_indexes(data_manager.persons)
 
     def print_pos():
-        IO_system().print_a_list_with_indexes(data_manager.positions)
+        IO_system.print_a_list_with_indexes(data_manager.positions)
 
     def print_emp():
-        IO_system().print_a_list_with_indexes(data_manager.employees)
+        IO_system.print_a_list_with_indexes(data_manager.employees)
 
     print_command = {'1': print_per,
                      '2': print_pos, '3': print_emp, '9': clear}
@@ -52,37 +52,32 @@ def sub_menu_print_base(data_manager:DataManager):
 
 
 def sub_menu_append():
-    append_command = {'1': DataManager().add_person,
-                      '2': DataManager().add_employee, '9': clear}
+    append_command = {'1': data_manager.add_person,
+                      '2': data_manager.add_employee, '3': data_manager.change_department, '4': data_manager.change_salary, '9': clear}
     menu(append_command, menu_append)
 
 
 def sub_menu_delete():
-    delete_command = {'1': zaglushka, '2': zaglushka, '9': clear}
+    delete_command = {'1': data_manager.delete_employee, '2': zaglushka, '9': clear}
     menu(delete_command, menu_delete)
 
 
 def sub_menu_query():
     def query_by_dep():
         print(' Выберите отдел:')
-        for dt in TypeOfDepartments:
-            print(str(dt.value) + ': ' + str(dt.name))
-        availableDepartmentCodes = [e.value for e in TypeOfDepartments]
-        selectedDepartment = -1
-        while selectedDepartment not in availableDepartmentCodes:
-            selectedDepartment = int(input(' Введите код отдела: '))
-        IO_system().print_a_list_with_indexes(qm().EmpluyeesFromDepartmentQuery(
-            TypeOfDepartments(selectedDepartment), DataManager()))
+        selectedDepartment = IO_system.select_from_enum(TypeOfDepartments, ' Введите код отдела: ')
+        IO_system().print_a_list_with_indexes(QueryManager.EmpluyeesFromDepartmentQuery(
+            TypeOfDepartments(selectedDepartment), data_manager))
     query_command = {'1': query_by_dep, '2': zaglushka, '9': clear}
     menu(query_command, menu_query)
 
 
 def main():
-    DataManager().init_system()
+    data_manager.init_system()
     head_command = {'1': sub_menu_print_base, '2': sub_menu_append,
                     '3': sub_menu_delete, '4': sub_menu_query, '9': clear}
     menu(head_command, menu_head)
     # Тут должен быть метод сохранения базы
 
-
-main()
+if __name__ == '__main__':
+    main()
