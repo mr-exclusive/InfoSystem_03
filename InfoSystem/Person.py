@@ -55,14 +55,14 @@ class Person:
                str(self.date_of_birth.day).zfill(2) + ' ' + \
                str(self.date_of_birth.month).zfill(2) + ' ' + \
                str(self.date_of_birth.year).zfill(4) + ' ' + \
-               str(self.gender.value)
+               str(self.gender.name)
 
     
 
     # Функция чтения всех полей их текстовой строки
     def from_txt_file(self, line:str):
 
-        splitted = line.split(' ')
+        splitted = line.strip().split(' ')
 
         if len(splitted) < 7:
 
@@ -72,8 +72,8 @@ class Person:
             self.last_name = splitted[0]
             self.first_name = splitted[1]
             self.middle_name = splitted[2]
-            self.date_of_birth = date(int(splitted[3]),int(splitted[4]),int(splitted[5]))
-            self.gender = TypeOfGenders(int(splitted[6]))
+            self.date_of_birth = date(int(splitted[5]),int(splitted[4]),int(splitted[3]))
+            self.gender = TypeOfGenders[splitted[6]]
 
             return True
 

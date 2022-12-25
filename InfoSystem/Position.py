@@ -31,16 +31,16 @@ class Position:
     # Функция для сохранения всех полей в текстовый файл
     def to_txt_file(self):
 
-        return self.position_type.value + ' ' + \
-               self.position_level.value + ' ' + \
-               str(self.salary).repl(',','.')
+        return self.position_type.name + ' ' + \
+               self.position_level.name + ' ' + \
+               str(self.salary).replace(',','.')
 
     
 
     # Функция чтения всех полей их текстовой строки
     def from_txt_file(self, line:str):
 
-        splitted = line.split(' ')
+        splitted = line.strip().split(' ')
 
         if len(splitted) < 3:
 

@@ -10,7 +10,7 @@ from TypeOfLevels import TypeOfLevels
 from TypeOfGenders import TypeOfGenders
 from TypeOfDepartments import TypeOfDepartments
 from Person import Person
-from IO_system import IO_system
+import IO_system
 from Employee import Employee
 
 class DataManager:

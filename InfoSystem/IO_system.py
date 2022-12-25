@@ -20,19 +20,19 @@ class IO_system:
         if extention.lower() == '.txt':
 
             with open(file_name + '_persons' + extention, 'w', encoding="utf-8") as file:
-                file.write(len(data_manager.persons) + '\n')
+                file.write(str(len(data_manager.persons)) + '\n')
 
                 for person in data_manager.persons:
                     file.write(person.to_txt_file() + '\n')
 
             with open(file_name + '_positions' + extention, 'w', encoding="utf-8") as file:
-                file.write(len(data_manager.positions) + '\n')
+                file.write(str(len(data_manager.positions)) + '\n')
 
                 for position in data_manager.positions:
                     file.write(position.to_txt_file() + '\n')
 
             with open(file_name + '_employees' + extention, 'w', encoding="utf-8") as file:
-                file.write(len(data_manager.employees) + '\n')
+                file.write(str(len(data_manager.employees)) + '\n')
 
                 for employee in data_manager.employees:
                     file.write(employee.to_txt_file(data_manager) + '\n')
@@ -54,15 +54,15 @@ class IO_system:
                     
                     data_manager.persons = []
 
-                    count = int(lines.pop().strip())
+                    count = int(lines.pop(0).strip())
 
-                    for i in range(1,count):
+                    for i in range(0, count):
 
-                        new_person = Person('', '', '', date.now(), TypeOfGenders.male)
+                        new_person = Person('', '', '', date(2000, 1, 1), TypeOfGenders.male)
 
                         try:
                         
-                            new_person.from_txt_file(lines.pop())
+                            new_person.from_txt_file(lines.pop(0))
 
                             data_manager.persons.append(new_person)
 
@@ -83,15 +83,15 @@ class IO_system:
                     
                     data_manager.positions = []
 
-                    count = int(lines.pop().strip())
+                    count = int(lines.pop(0).strip())
 
-                    for i in range(1,count):
+                    for i in range(0, count):
 
                         new_position = Position(0.0, TypeOfPositions.boss, TypeOfLevels.junior)
 
                         try:
                         
-                            new_position.from_txt_file(lines.pop())
+                            new_position.from_txt_file(lines.pop(0))
 
                             data_manager.positions.append(new_position)
 
@@ -112,15 +112,15 @@ class IO_system:
                     
                     data_manager.employees = []
 
-                    count = int(lines.pop().strip())
+                    count = int(lines.pop(0).strip())
 
-                    for i in range(1,count):
+                    for i in range(0, count):
 
                         new_employee = Employee(TypeOfDepartments.engineering, None, None)
 
                         try:
                         
-                            new_employee.from_txt_file(lines.pop(), data_manager)
+                            new_employee.from_txt_file(lines.pop(0), data_manager)
 
                             data_manager.employees.append(new_employee)
 
