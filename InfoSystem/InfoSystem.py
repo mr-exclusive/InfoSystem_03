@@ -8,7 +8,6 @@ import os
 import click
 from IO_system import IO_system
 from DataManager import DataManager
-import QueryManager
 from TypeOfDepartments import TypeOfDepartments
 
 data_manager = DataManager()
