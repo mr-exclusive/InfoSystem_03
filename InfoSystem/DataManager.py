@@ -304,5 +304,4 @@ class DataManager:
         selected_department = IO_system.select_from_enum(TypeOfDepartments, "Введите код отдела: ")
 
 
-        self.employees.append(Employee(TypeOfDepartments(selected_department), 
-        self.persons[person_index], self.positions[position_index])) 
+        self.employees.append(Employee(TypeOfDepartments(selected_department), self.persons[person_index], self.positions[position_index])) 
